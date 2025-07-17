@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.example.joyrun.utils.FormatUtils" />
+
+        <variable
+            name="event"
+            type="com.example.joyrun.bean.RunningEvent" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/itemRoot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingStart="20dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:clipChildren="false"
+            app:cardBackgroundColor="@android:color/white"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="6dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.example.joyrun.custom.PathPreviewView
+                android:id="@+id/ppv_plan"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:background="#d9e8c9" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tvStartTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="@{FormatUtils.formatTimestamp(event.startTime)}"
+            android:textColor="#7e7e7e"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@id/cardView"
+            app:layout_constraintTop_toTopOf="@id/cardView" />
+
+        <TextView
+            android:id="@+id/tvDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text='@{FormatUtils.formatDistanceWithoutkm(event.totalDistance)}'
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/tvStartTime"
+            app:layout_constraintTop_toBottomOf="@+id/tvStartTime" />
+
+        <TextView
+            android:id="@+id/tvKm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginBottom="2dp"
+            android:text='km'
+            android:textColor="#8F939B"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tvDistance"
+            app:layout_constraintStart_toEndOf="@id/tvDistance" />
+
+        <TextView
+            android:id="@+id/tvDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:minWidth="75dp"
+            android:text='@{"用时 "+FormatUtils.formatDuration(event.duration)}'
+            android:textColor="#b5b5b5"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/tvStartTime"
+            app:layout_constraintTop_toBottomOf="@id/tvDistance" />
+
+        <TextView
+            android:id="@+id/tvPace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text='@{"配速 "+FormatUtils.formatPace(event.totalDistance, event.duration)}'
+            android:minWidth="60dp"
+            android:textColor="#b5b5b5"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@id/tvDuration"
+            app:layout_constraintTop_toTopOf="@id/tvDuration" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

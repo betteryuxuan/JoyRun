@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/sport"
+        android:title="运动"
+        android:icon="@drawable/ic_sport"
+        />
+    <item
+        android:id="@+id/plan"
+        android:title="计划"
+        android:icon="@drawable/ic_plan"
+        />
+    <item
+        android:id="@+id/chat"
+        android:title="AI"
+        android:icon="@drawable/ic_ai"
+        />
+    <item
+        android:id="@+id/user"
+        android:title="我的"
+        android:icon="@drawable/ic_user"
+        />
+</menu>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/run_outdoor"
+        android:title="户外跑步"
+        android:icon="@drawable/ic_runoutdoor"
+        />
+    <item
+        android:id="@+id/run_indoor"
+        android:title="室内跑步"
+        android:icon="@drawable/ic_runindoor"
+        />
+</menu>
