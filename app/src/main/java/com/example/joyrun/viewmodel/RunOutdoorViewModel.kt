@@ -2,7 +2,6 @@ package com.example.joyrun.viewmodel
 
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,15 +9,14 @@ import com.amap.api.location.AMapLocation
 import com.amap.api.maps2d.AMapUtils
 import com.amap.api.maps2d.model.LatLng
 import com.example.joyrun.DAO.RunningEventDao
-import com.example.joyrun.DAO.RunningEventDatabase
 import com.example.joyrun.bean.RunningEvent
-import com.example.joyrun.model.CountDownModel
+import com.example.joyrun.model.RunOutdoorModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CountDownViewModel(private val dao: RunningEventDao) : ViewModel() {
+class RunOutdoorViewModel(private val dao: RunningEventDao) : ViewModel() {
     private var totalDistance: Float = 0.00f
-    private val model = CountDownModel(dao)
+    private val model = RunOutdoorModel(dao)
 
     private var _isRunning = false
     val isRunning get() = _isRunning

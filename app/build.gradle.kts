@@ -45,6 +45,7 @@ dependencies {
     implementation("com.github.weidongjian:androidWheelView:1.0.0")
     implementation("com.google.code.gson:gson:2.13.1")
     implementation("androidx.viewpager2:viewpager2:1.1.0")
+    implementation("com.github.yannecer:NCalendar:6.0.0")
 
     implementation("com.amap.api:map2d:6.0.0")
     implementation("com.amap.api:location-aar:4.5.0")

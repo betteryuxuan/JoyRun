@@ -5,7 +5,7 @@ import com.example.joyrun.bean.RunningEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class CountDownModel(private val dao: RunningEventDao) {
+class RunOutdoorModel(private val dao: RunningEventDao) {
     suspend fun insert(runningEvent: RunningEvent) {
         dao.insert(runningEvent)
     }

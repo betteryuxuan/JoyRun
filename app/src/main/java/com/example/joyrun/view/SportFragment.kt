@@ -17,15 +17,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.example.joyrun.R
 import com.example.joyrun.adapter.SportVPAdapter
-import com.example.joyrun.custom.LoopWheelDialogFragment
 import com.example.joyrun.databinding.FragmentSportBinding
 import com.example.joyrun.viewmodel.SportViewModel
-
 
 class SportFragment : Fragment() {
     private lateinit var viewModel: SportViewModel
     private var _binding: FragmentSportBinding? = null
     private val binding get() = _binding!!
+    private lateinit var adapter: SportVPAdapter
     private val locationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
             val granted = permissions.entries.all {
@@ -59,29 +58,15 @@ class SportFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.tvDistance.setOnClickListener {
-            val dialog = LoopWheelDialogFragment(
-                onDistanceSelected = {
-                    viewModel.targetDistance = it
-                    binding.tvDistance.text = "目标距离 ${it} 公里"
-                }, viewModel.targetDistance
-            )
-            dialog.show(parentFragmentManager, "LoopWheelDialog")
-        }
-
         binding.navigationSportType.setItemSelected(R.id.run_outdoor, true)
         binding.navigationSportType.setOnItemSelectedListener { id ->
             when (id) {
-                R.id.run_outdoor -> {
-                    binding.vpSport.setCurrentItem(0, true)
-                }
-
-                R.id.run_indoor -> {
-                    binding.vpSport.setCurrentItem(1, true)
-                }
+                R.id.run_outdoor -> binding.vpSport.setCurrentItem(0, true)
+                R.id.run_indoor -> binding.vpSport.setCurrentItem(1, true)
             }
         }
-        binding.vpSport.adapter = SportVPAdapter(requireActivity())
+        adapter = SportVPAdapter(requireActivity())
+        binding.vpSport.adapter = adapter
         binding.vpSport.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
@@ -93,7 +78,7 @@ class SportFragment : Fragment() {
                 )
             }
         })
-        binding.vpSport.offscreenPageLimit =1
+        binding.vpSport.offscreenPageLimit = 1
 
         binding.imgSport.setOnClickListener {
             checkLocationPermission()
@@ -126,15 +111,23 @@ class SportFragment : Fragment() {
             ) {
                 locationPermissionLauncher.launch(arrayOf(Manifest.permission.ACCESS_BACKGROUND_LOCATION))
             } else {
-                val intent = Intent(context, CountDownAndRunActivity::class.java)
-                startActivity(intent)
+                checkAndStartRunStyle()
             }
         } else {
-            val intent = Intent(context, CountDownAndRunActivity::class.java)
-            startActivity(intent)
+            checkAndStartRunStyle()
         }
     }
 
+    fun checkAndStartRunStyle() {
+        if (binding.navigationSportType.getSelectedItemId() == R.id.run_outdoor) {
+            val intent = Intent(context, RunOutdoorActivity::class.java)
+            startActivity(intent)
+        } else {
+            val intent = Intent(context, RunIndoorActivity::class.java)
+            intent.putExtra("distance", adapter.getIndoorDistance())
+            startActivity(intent)
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

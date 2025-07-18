@@ -9,6 +9,7 @@ import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.amap.api.location.AMapLocationClient
@@ -20,15 +21,14 @@ import com.amap.api.maps2d.model.MyLocationStyle
 import com.amap.api.maps2d.model.PolylineOptions
 import com.example.joyrun.DAO.RunningEventDatabase
 import com.example.joyrun.R
-import com.example.joyrun.databinding.ActivityCountDownBinding
-import com.example.joyrun.model.CountDownModel
+import com.example.joyrun.databinding.ActivityRunOutdoorBinding
 import com.example.joyrun.utils.FormatUtils
-import com.example.joyrun.viewmodel.CountDownViewModel
-import com.example.joyrun.viewmodel.CountDownViewModelFactory
+import com.example.joyrun.viewmodel.RunOutdoorViewModel
+import com.example.joyrun.viewmodel.RunOutdoorViewModelFactory
 
-class CountDownAndRunActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityCountDownBinding
-    private lateinit var viewModel: CountDownViewModel
+class RunOutdoorActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityRunOutdoorBinding
+    private lateinit var viewModel: RunOutdoorViewModel
     private lateinit var aMap: AMap
     private var isRunningStarted = false // 用于按钮控制
 
@@ -51,13 +51,14 @@ class CountDownAndRunActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityCountDownBinding.inflate(layoutInflater)
+        enableEdgeToEdge()
+        binding = ActivityRunOutdoorBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val dao = RunningEventDatabase.getInstance(this).runningEventDao()
-        val factory = CountDownViewModelFactory(dao)
+        val factory = RunOutdoorViewModelFactory(dao)
 
-        viewModel = ViewModelProvider(this, factory)[CountDownViewModel::class.java]
+        viewModel = ViewModelProvider(this, factory)[RunOutdoorViewModel::class.java]
         binding.lifecycleOwner = this
 
         binding.mapRun.onCreate(savedInstanceState)
@@ -136,7 +137,6 @@ class CountDownAndRunActivity : AppCompatActivity() {
         scaleDownUp.start()
 
     }
-
 
     private fun initMap() {
         aMap = binding.mapRun.map
@@ -217,7 +217,6 @@ class CountDownAndRunActivity : AppCompatActivity() {
         // 禁止返回键
     }
 
-
     override fun onPause() {
         super.onPause()
         binding.mapRun.onPause()
@@ -232,7 +231,6 @@ class CountDownAndRunActivity : AppCompatActivity() {
             locationClient.onDestroy()
         }
     }
-
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)

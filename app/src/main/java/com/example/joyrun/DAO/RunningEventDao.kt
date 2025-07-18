@@ -15,9 +15,13 @@ interface RunningEventDao {
     @Query("SELECT * FROM RunningEvent ORDER BY startTime DESC")
     fun getAllAsLiveData(): LiveData<List<RunningEvent>>
 
+    @Query("SELECT * FROM RunningEvent WHERE startTime >= :startOfDay  AND startTime <= :endOfDay")
+    fun getEventsByDateAsLiveData(startOfDay: Long, endOfDay: Long): LiveData<List<RunningEvent>>
+
     @Insert
     fun insert(runningEvent: RunningEvent)
 
     @Delete
     fun delete(runningEvent: RunningEvent)
+
 }

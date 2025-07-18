@@ -1,36 +1,40 @@
-package com.example.joyrun.view
+package com.example.joyrun.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.amap.api.maps2d.model.LatLng
 import com.example.joyrun.bean.RunningEvent
-import com.example.joyrun.custom.PathPreviewView
 import com.example.joyrun.databinding.ItemRunningEventBinding
 
-class RunningEventAdapter :
+class RunningEventAdapter(private val onItemLongClick: (RunningEvent) -> Unit) :
     ListAdapter<RunningEvent, RunningEventAdapter.ViewHolder>(DiffCallback()) {
-
-    private lateinit var pathPreview: PathPreviewView
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
             ItemRunningEventBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding)
+        return ViewHolder(binding, onItemLongClick)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(private val binding: ItemRunningEventBinding) :
+    class ViewHolder(
+        private val binding: ItemRunningEventBinding,
+        private val onItemLongClick: (RunningEvent) -> Unit
+    ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(event: RunningEvent) {
             binding.event = event
             binding.ppvPlan.setPath(event.pathPoints)
             binding.executePendingBindings()
+
+            binding.root.setOnLongClickListener {
+                onItemLongClick(event)
+                true
+            }
         }
     }
 

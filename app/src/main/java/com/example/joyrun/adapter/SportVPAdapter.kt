@@ -16,4 +16,8 @@ class SportVPAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(
 
     override fun createFragment(position: Int): Fragment = fragments[position]
 
+    fun getIndoorDistance(): Float {
+        return (fragments[1] as SportIndoorFragment).getDistance()
+    }
+
 }

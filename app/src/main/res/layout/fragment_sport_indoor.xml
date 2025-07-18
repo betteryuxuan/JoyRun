@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="viewModel"
+            type="com.example.joyrun.viewmodel.SportViewModel" />
 
     </data>
 
@@ -40,6 +43,38 @@
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_runindoor2" />
 
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_sport_distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="#e8e8ea"
+                    android:layout_marginBottom="20dp"
+                    android:layout_gravity="center_horizontal|bottom"
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingStart="12dp"
+                        android:paddingTop="8dp"
+                        android:paddingEnd="12dp"
+                        android:paddingBottom="8dp">
+
+
+                        <TextView
+                            android:id="@+id/tv_distance"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="设置距离"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
             </FrameLayout>
 

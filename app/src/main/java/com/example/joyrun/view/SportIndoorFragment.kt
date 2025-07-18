@@ -6,9 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.joyrun.R
+import com.example.joyrun.custom.LoopWheelDialogFragment
+import com.example.joyrun.databinding.FragmentSportIndoorBinding
+import com.example.joyrun.databinding.FragmentSportOutdoorBinding
 
 class SportIndoorFragment : Fragment() {
-
+    private lateinit var binding: FragmentSportIndoorBinding
+    private var currentDistance: Float = 0f
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -17,7 +21,24 @@ class SportIndoorFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_sport_indoor, container, false)
+        binding = FragmentSportIndoorBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.tvDistance.setOnClickListener {
+            val dialog = LoopWheelDialogFragment(
+                onDistanceSelected = {
+                    currentDistance = it
+                    binding.tvDistance.text = "目标距离 ${it} 公里"
+                }, currentDistance
+            )
+            dialog.show(parentFragmentManager, "LoopWheelDialog")
+        }
+    }
+    fun getDistance(): Float {
+        return currentDistance
     }
 
 }

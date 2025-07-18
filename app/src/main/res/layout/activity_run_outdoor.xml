@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.joyrun.viewmodel.CountDownViewModel" />
+            type="com.example.joyrun.viewmodel.RunOutdoorViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

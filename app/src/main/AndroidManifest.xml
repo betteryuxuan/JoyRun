@@ -26,7 +26,10 @@
         android:theme="@style/Theme.JoyRun"
         tools:targetApi="31">
         <activity
-            android:name=".view.CountDownAndRunActivity"
+            android:name=".view.RunIndoorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.RunOutdoorActivity"
             android:exported="false" />
         <activity
             android:name=".view.MainActivity"
@@ -40,7 +43,7 @@
 
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="5a963d65a0a1b6993b3c53bf1258faea"></meta-data>
+            android:value="5a963d65a0a1b6993b3c53bf1258faea" />
 
         <service android:name="com.amap.api.location.APSService" />
     </application>

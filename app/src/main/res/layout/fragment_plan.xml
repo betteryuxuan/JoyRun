@@ -3,25 +3,70 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="viewModel"
-            type="com.example.joyrun.viewmodel.CountDownViewModel" />
+            type="com.example.joyrun.viewmodel.PlanViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.necer.calendar.NCalendar
+            android:id="@+id/calender_plan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:solarTextBold="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:calendarHeight="280dp"
+            app:stretchCalendarEnable="true" />
+
+        <View
+            android:id="@+id/view_top_divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="#EFEFEF"
+            app:layout_constraintTop_toBottomOf="@id/calender_plan"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_totaltime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text='@{viewModel.totalTime > 0 ? "今日运动时长 " + viewModel.totalTime / 1000 / 60 + " 分钟" : "今日暂无运动记录，快去运动吧～"}'
+            android:textColor="#666666"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/view_top_divider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <View
+            android:id="@+id/view_bottom_divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="#EFEFEF"
+            app:layout_constraintTop_toBottomOf="@id/tv_totaltime"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvRunningEvents"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:clipToPadding="false"
+            app:layout_constraintTop_toBottomOf="@id/view_bottom_divider"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
