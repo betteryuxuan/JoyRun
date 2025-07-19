@@ -8,6 +8,7 @@ import com.amap.api.maps2d.model.LatLng
 data class RunningEvent(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0L,
+    var runType: Int = 0, // 运动类型，0室内，1室外
     var startTime: Long ?= null,             // 跑步开始时间
     var endTime: Long? = null,                // 跑步结束时间
     var totalDistance: Float = 0f,         // 总距离（米）

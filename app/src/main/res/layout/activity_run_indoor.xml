@@ -23,7 +23,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="40dp"
                 android:src="@drawable/ic_runoutdoor_gray"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -68,6 +68,7 @@
                         android:textSize="18sp" />
 
                     <TextView
+                        android:id="@+id/tv_indoor_percent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -76,6 +77,7 @@
                         android:textSize="14sp" />
 
                     <ProgressBar
+                        android:id="@+id/bar_indoor"
                         style="?android:attr/progressBarStyleHorizontal"
                         android:layout_width="match_parent"
                         android:layout_height="6dp"
@@ -195,6 +197,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_indoor_remain"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0.00"

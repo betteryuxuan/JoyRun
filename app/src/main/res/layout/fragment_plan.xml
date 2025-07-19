@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.joyrun.viewmodel.PlanViewModel" />
+            type="com.example.joyrun.planpage.viewmodel.PlanViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +16,7 @@
             android:id="@+id/calender_plan"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="40dp"
             app:solarTextBold="true"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.joyrun.viewmodel.MainViewModel" />
+            type="com.example.joyrun.homepage.viewmodel.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:fitsSystemWindows="true"
         android:layout_height="match_parent"
-        tools:context=".view.MainActivity">
+        tools:context=".homepage.view.MainActivity">
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/main_vp"

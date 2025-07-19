@@ -26,13 +26,14 @@
         android:theme="@style/Theme.JoyRun"
         tools:targetApi="31">
         <activity
-            android:name=".view.RunIndoorActivity"
+            android:name=".runpage.view.RunIndoorActivity"
             android:exported="false" />
         <activity
-            android:name=".view.RunOutdoorActivity"
+            android:name=".runpage.view.RunOutdoorActivity"
             android:exported="false" />
         <activity
-            android:name=".view.MainActivity"
+            android:name=".homepage.view.MainActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

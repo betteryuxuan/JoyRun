@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.joyrun.viewmodel.RunOutdoorViewModel" />
+            type="com.example.joyrun.runpage.viewmodel.RunOutdoorViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -148,8 +148,8 @@
 
         <ImageView
             android:id="@+id/img_finish"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:layout_marginBottom="40dp"
             android:src="@drawable/ic_finish"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -169,8 +169,8 @@
 
         <ImageView
             android:id="@+id/img_pause_continue"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:layout_marginStart="30dp"
             android:layout_marginBottom="40dp"
             android:padding="5dp"

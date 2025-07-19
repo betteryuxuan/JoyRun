@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.joyrun.viewmodel.SportViewModel" />
+            type="com.example.joyrun.homepage.viewmodel.SportViewModel" />
 
     </data>
 

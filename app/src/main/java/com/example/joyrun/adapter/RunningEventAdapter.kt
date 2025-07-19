@@ -1,6 +1,7 @@
 package com.example.joyrun.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -28,7 +29,14 @@ class RunningEventAdapter(private val onItemLongClick: (RunningEvent) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(event: RunningEvent) {
             binding.event = event
-            binding.ppvPlan.setPath(event.pathPoints)
+            if (event.runType == 0) {
+                binding.ppvPlan.visibility = View.GONE
+                binding.imgRunIndoor.visibility = View.VISIBLE
+            } else if (event.runType == 1) {
+                binding.ppvPlan.visibility = View.VISIBLE
+                binding.imgRunIndoor.visibility = View.GONE
+                binding.ppvPlan.setPath(event.pathPoints)
+            }
             binding.executePendingBindings()
 
             binding.root.setOnLongClickListener {
