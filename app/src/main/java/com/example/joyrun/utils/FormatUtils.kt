@@ -1,6 +1,8 @@
 package com.example.joyrun.utils
 
 import java.text.SimpleDateFormat
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.Locale
 import java.util.concurrent.TimeUnit
@@ -68,5 +70,10 @@ object FormatUtils {
         if (minutes > 9999 || (minutes == 0 && seconds == 0))
             return "--'--\""
         return String.format("%2d'%2d\"", minutes, seconds)
+    }
+
+    fun getFormattedNowTime(): String {
+        val formatter = DateTimeFormatter.ofPattern("a h:mm", Locale.CHINA)
+        return LocalTime.now().format(formatter)
     }
 }

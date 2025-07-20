@@ -10,6 +10,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:background="@drawable/gradient_grenn_to_white"
         android:layout_height="match_parent">
 
         <com.necer.calendar.NCalendar
@@ -41,7 +42,7 @@
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:text='@{viewModel.totalTime > 0 ? "今日运动时长 " + viewModel.totalTime / 1000 / 60 + " 分钟" : "今日暂无运动记录，快去运动吧～"}'
-            android:textColor="#666666"
+            android:textColor="#4D4D4D"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/view_top_divider"

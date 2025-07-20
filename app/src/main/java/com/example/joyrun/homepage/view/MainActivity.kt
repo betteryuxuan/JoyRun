@@ -34,12 +34,25 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         binding.viewModel = mainViewModel
-        binding.lifecycleOwner = this //让 LiveData 能自动更新界面
+        binding.lifecycleOwner = this
 
         val vpAdapter = MainVPAdapter(this)
         binding.mainVp.adapter = vpAdapter
         binding.bottomNavigation.setupWithViewPager2(binding.mainVp)
         binding.mainVp.isUserInputEnabled = false
+        binding.mainVp.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                if (position == 1) {
+                    binding.bottomNavigation.setBackgroundColor(0xFFDFF5E3.toInt())
+                } else if (position == 2) {
+                    binding.bottomNavigation.setBackgroundColor(0xFFF5F5F5.toInt())
+                } else {
+                    binding.bottomNavigation.setBackgroundColor(getColor(R.color.white))
+                }
+            }
+        })
+
 
     }
 

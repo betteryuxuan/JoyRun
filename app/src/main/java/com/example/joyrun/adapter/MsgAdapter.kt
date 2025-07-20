@@ -13,12 +13,24 @@ class MsgAdapter(private var msgList: MutableList<Msg>) :
     RecyclerView.Adapter<MsgAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.msg_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_msg, parent, false)
         return MyViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val msg = msgList[position]
+
+        // 设置第一个 item 的顶部 margin
+        val layoutParams = holder.itemView.layoutParams as? ViewGroup.MarginLayoutParams
+        if (layoutParams != null) {
+            if (position == 0) {
+                layoutParams.topMargin = dpToPx(holder.itemView.context, 35)
+            } else {
+                layoutParams.topMargin = 0
+            }
+            holder.itemView.layoutParams = layoutParams
+        }
+
         when (msg.type) {
             Msg.TYPE_RECEIVED -> {
                 holder.leftLayout.visibility = View.VISIBLE
@@ -44,6 +56,11 @@ class MsgAdapter(private var msgList: MutableList<Msg>) :
         }
     }
 
+    fun dpToPx(context: android.content.Context, dp: Int): Int {
+        val scale = context.resources.displayMetrics.density
+        return (dp * scale + 0.5f).toInt()
+    }
+
     override fun getItemCount(): Int = msgList.size
 
     fun setMsgList(msgList: MutableList<Msg>) {
@@ -52,6 +69,11 @@ class MsgAdapter(private var msgList: MutableList<Msg>) :
 
     fun addMessage(msg: Msg) {
         msgList.add(msg)
+    }
+
+    fun updateData(newList: List<Msg>) {
+        msgList = newList.toMutableList()
+        notifyDataSetChanged()
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

@@ -16,6 +16,7 @@ import com.example.joyrun.databinding.FragmentPlanBinding
 import com.example.joyrun.db.RunningEventDatabase
 import com.example.joyrun.planpage.viewmodel.PlanViewModel
 import com.example.joyrun.planpage.viewmodel.PlanViewModelFactory
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.time.ZoneId
 
 class PlanFragment : Fragment() {
@@ -59,13 +60,12 @@ class PlanFragment : Fragment() {
     }
 
     private fun showDeleteDialog(event: RunningEvent) {
-        val context = requireContext()
-        AlertDialog.Builder(context).setTitle("删除记录").setMessage("确定要删除这条运动记录吗？")
+        MaterialAlertDialogBuilder(requireContext(), R.style.MyAlertDialog)
+            .setTitle("删除记录")
+            .setMessage("确定要删除这条运动记录吗？")
             .setPositiveButton("确定") { _, _ ->
                 viewModel.deleteEvent(event)
-            }.setNegativeButton("取消", null).show()
+            }.setNegativeButton("取消", null)
+            .show()
     }
-
-
-
 }
