@@ -68,7 +68,7 @@
             android:id="@+id/tvDistance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text='@{FormatUtils.formatDistanceWithoutkm(event.totalDistance)}'
+            android:text='@{FormatUtils.formatDistanceWithoutKm(event.totalDistance)}'
             android:textColor="@color/black"
             android:textSize="28sp"
             android:fontFamily="@font/mibold"
@@ -82,12 +82,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
-            android:layout_marginBottom="4dp"
             android:text='km'
             android:textColor="#8F939B"
             android:textSize="12sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/tvDistance"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tvDistance"
             app:layout_constraintStart_toEndOf="@id/tvDistance" />
 
         <TextView

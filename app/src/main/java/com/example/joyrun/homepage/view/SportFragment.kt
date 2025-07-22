@@ -24,8 +24,10 @@ import com.example.joyrun.homepage.viewmodel.SportViewModel
 
 class SportFragment : Fragment() {
     private lateinit var viewModel: SportViewModel
+
     private var _binding: FragmentSportBinding? = null
     private val binding get() = _binding!!
+
     private lateinit var adapter: SportVPAdapter
     private val locationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->

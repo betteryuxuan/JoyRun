@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.joyrun"
-        minSdk = 28
+        minSdk = 29
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -49,6 +49,7 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:3.0.0")
     implementation("com.squareup.retrofit2:converter-gson:3.0.0")
 //    implementation("com.squareup.okhttp3:okhttp:3.1.2")
+    implementation("de.hdodenhof:circleimageview:3.1.0")
 
     implementation("com.amap.api:map2d:6.0.0")
     implementation("com.amap.api:location-aar:4.5.0")
@@ -57,6 +58,7 @@ dependencies {
     implementation("androidx.room:room-ktx:2.7.2")
     kapt("androidx.room:room-compiler:2.7.2")
 
+    implementation("androidx.core:core-ktx:1.10.1")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

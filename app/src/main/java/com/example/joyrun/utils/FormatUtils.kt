@@ -1,8 +1,10 @@
 package com.example.joyrun.utils
 
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 import java.util.concurrent.TimeUnit
@@ -27,11 +29,15 @@ object FormatUtils {
     }
 
     @JvmStatic
-    fun formatDistanceWithoutkm(distanceInMeters: Float): String {
+    fun formatDistanceWithoutKm(distanceInMeters: Float): String {
         val km = distanceInMeters / 1000f
         return String.format("%.2f", km)
     }
 
+    @JvmStatic
+    fun formatDistanceByIntWithoutKm(distanceInMeters: Float): String {
+        return (distanceInMeters / 1000f).toInt().toString()
+    }
 
     // 时长（毫秒）转为 hh:mm:ss 格式
     @JvmStatic
@@ -76,4 +82,24 @@ object FormatUtils {
         val formatter = DateTimeFormatter.ofPattern("a h:mm", Locale.CHINA)
         return LocalTime.now().format(formatter)
     }
+
+    @JvmStatic
+    fun getCurrentMonthPercent(): String {
+        val calendar = Calendar.getInstance()
+        val today = calendar.get(Calendar.DAY_OF_MONTH)
+        val maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
+        val percent = today.toDouble() / maxDay * 100
+        val formatted = String.format("%.0f", percent)
+        return "时间已过 $formatted%"
+    }
+
+    @JvmStatic
+    fun getCurrentYearPercent(): Double {
+        val calendar = Calendar.getInstance()
+        val currentDayOfYear = calendar.get(Calendar.DAY_OF_YEAR)
+        val maxDayOfYear = if (calendar.getActualMaximum(Calendar.DAY_OF_YEAR) == 366) 366 else 365
+        val percent = currentDayOfYear.toDouble() / maxDayOfYear * 100
+        return percent
+    }
+
 }

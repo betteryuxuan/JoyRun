@@ -43,12 +43,14 @@ class MainActivity : AppCompatActivity() {
         binding.mainVp.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                if (position == 1) {
+                if (position == 0) {
+                    binding.bottomNavigation.setBackgroundColor(getColor(R.color.white))
+                } else if (position == 1) {
                     binding.bottomNavigation.setBackgroundColor(0xFFDFF5E3.toInt())
                 } else if (position == 2) {
                     binding.bottomNavigation.setBackgroundColor(0xFFF5F5F5.toInt())
-                } else {
-                    binding.bottomNavigation.setBackgroundColor(getColor(R.color.white))
+                } else if (position == 3){
+                    binding.bottomNavigation.setBackgroundColor(0xFFEFDBD5.toInt())
                 }
             }
         })
