@@ -54,6 +54,6 @@ class PersonalRepository(private val dao: RunningEventDao, private val context: 
     }
 
     fun getUserName(): String {
-        return SPUtils.getString(context, SPUtils.USER_NAME_KEY, "FengYuxuan")
+        return SPUtils.getString(context, SPUtils.USER_NAME_KEY, "冯雨轩")
     }
 }

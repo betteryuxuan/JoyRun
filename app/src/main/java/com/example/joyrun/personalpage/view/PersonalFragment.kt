@@ -220,7 +220,7 @@ class PersonalFragment : Fragment() {
                 }
         } else {
             binding.progressMonthPlan.setProgress(0, true)
-
+            binding.tvMonthCompleted.text ="已完成 0%"
         }
     }
 

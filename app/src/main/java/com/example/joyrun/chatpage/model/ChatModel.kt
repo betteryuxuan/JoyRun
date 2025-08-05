@@ -3,14 +3,33 @@ package com.example.joyrun.chatpage.model
 import android.content.Context
 import android.util.Log
 import com.example.joyrun.bean.Msg
+import com.example.joyrun.network.ApiService
 import com.example.joyrun.network.ChatRequest
 import com.example.joyrun.network.Message
-import com.example.joyrun.network.RetrofitClient
 import com.example.module.libBase.utils.SPUtils
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 class ChatModel(private val context: Context) {
+    private val BASE_URL = "https://open.bigmodel.cn/"
+    private val okHttpClient = OkHttpClient.Builder()
+        .connectTimeout(15, TimeUnit.SECONDS)
+        .readTimeout(15, TimeUnit.SECONDS)
+        .writeTimeout(15, TimeUnit.SECONDS)
+        .build()
+
+    private val retrofit = Retrofit.Builder()
+        .baseUrl(BASE_URL)
+        .client(okHttpClient)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
+    private val api = retrofit.create(ApiService::class.java)
+
     suspend fun sendChatRequest(content: String): String {
         val request = ChatRequest(
             model = "glm-4-plus",
@@ -24,7 +43,8 @@ class ChatModel(private val context: Context) {
             stream = false
         )
         return try {
-            val response = RetrofitClient.instance.sendChatRequest(request)
+            // 协程 + suspend挂起函数
+            val response = api.sendChatRequest(request)
             Log.d("ChatModel", "response: $response")
             response.choices.firstOrNull()?.message?.content ?: "服务器繁忙，请稍后再试"
         } catch (e: Exception) {

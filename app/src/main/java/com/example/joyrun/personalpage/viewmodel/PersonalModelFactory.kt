@@ -13,5 +13,4 @@ class PersonalModelFactory(private val dao: RunningEventDao, private val context
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
-
 }

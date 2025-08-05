@@ -2,6 +2,7 @@ package com.example.joyrun.homepage.view
 
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -16,6 +17,7 @@ import com.example.joyrun.R
 import com.example.joyrun.adapter.MainVPAdapter
 import com.example.joyrun.databinding.ActivityMainBinding
 import com.example.joyrun.homepage.viewmodel.MainViewModel
+import java.lang.ref.WeakReference
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mainViewModel: MainViewModel
@@ -49,12 +51,11 @@ class MainActivity : AppCompatActivity() {
                     binding.bottomNavigation.setBackgroundColor(0xFFDFF5E3.toInt())
                 } else if (position == 2) {
                     binding.bottomNavigation.setBackgroundColor(0xFFF5F5F5.toInt())
-                } else if (position == 3){
+                } else if (position == 3) {
                     binding.bottomNavigation.setBackgroundColor(0xFFEFDBD5.toInt())
                 }
             }
         })
-
 
     }
 
@@ -76,4 +77,6 @@ class MainActivity : AppCompatActivity() {
         }
         return super.dispatchTouchEvent(ev)
     }
+
+
 }

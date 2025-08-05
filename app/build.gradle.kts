@@ -48,17 +48,19 @@ dependencies {
     implementation("com.github.yannecer:NCalendar:6.0.0")
     implementation("com.squareup.retrofit2:retrofit:3.0.0")
     implementation("com.squareup.retrofit2:converter-gson:3.0.0")
-//    implementation("com.squareup.okhttp3:okhttp:3.1.2")
     implementation("de.hdodenhof:circleimageview:3.1.0")
 
+    // 地图定位
     implementation("com.amap.api:map2d:6.0.0")
     implementation("com.amap.api:location-aar:4.5.0")
-
+    // 数据库
     implementation("androidx.room:room-runtime:2.7.2")
     implementation("androidx.room:room-ktx:2.7.2")
     kapt("androidx.room:room-compiler:2.7.2")
 
-    implementation("androidx.core:core-ktx:1.10.1")
+//    implementation("androidx.core:core-ktx:1.10.1")
+
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.14")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

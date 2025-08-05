@@ -10,65 +10,43 @@ import com.example.joyrun.R
 import com.example.joyrun.bean.Msg
 
 class MsgAdapter(private var msgList: MutableList<Msg>) :
-    RecyclerView.Adapter<MsgAdapter.MyViewHolder>() {
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_msg, parent, false)
-        return MyViewHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val msg = msgList[position]
-
-        // 设置第一个 item 的顶部 margin
-        val layoutParams = holder.itemView.layoutParams as? ViewGroup.MarginLayoutParams
-        if (layoutParams != null) {
-            if (position == 0) {
-                layoutParams.topMargin = dpToPx(holder.itemView.context, 35)
-            } else {
-                layoutParams.topMargin = 0
-            }
-            holder.itemView.layoutParams = layoutParams
-        }
-
-        when (msg.type) {
-            Msg.TYPE_RECEIVED -> {
-                holder.leftLayout.visibility = View.VISIBLE
-                holder.rightLayout.visibility = View.GONE
-                holder.thinkingLayout.visibility = View.GONE
-                holder.leftMsg.text = msg.content
-                holder.leftTime.text = msg.time
-            }
-
-            Msg.TYPE_SENT -> {
-                holder.leftLayout.visibility = View.GONE
-                holder.rightLayout.visibility = View.VISIBLE
-                holder.thinkingLayout.visibility = View.GONE
-                holder.rightMsg.text = msg.content
-                holder.rightTime.text = msg.time
-            }
-
-            Msg.TYPE_THINKING -> {
-                holder.leftLayout.visibility = View.GONE
-                holder.rightLayout.visibility = View.GONE
-                holder.thinkingLayout.visibility = View.VISIBLE
-            }
-        }
-    }
-
-    fun dpToPx(context: android.content.Context, dp: Int): Int {
-        val scale = context.resources.displayMetrics.density
-        return (dp * scale + 0.5f).toInt()
+    companion object {
+        private const val VIEW_TYPE_RECEIVED = Msg.TYPE_RECEIVED
+        private const val VIEW_TYPE_SENT = Msg.TYPE_SENT
     }
 
     override fun getItemCount(): Int = msgList.size
 
-    fun setMsgList(msgList: MutableList<Msg>) {
-        this.msgList = msgList
+    override fun getItemViewType(position: Int): Int {
+        return when (msgList[position].type) {
+            Msg.TYPE_RECEIVED -> VIEW_TYPE_RECEIVED
+            Msg.TYPE_SENT -> VIEW_TYPE_SENT
+            else -> VIEW_TYPE_RECEIVED
+        }
     }
 
-    fun addMessage(msg: Msg) {
-        msgList.add(msg)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        return when (viewType) {
+            VIEW_TYPE_SENT -> {
+                val view = inflater.inflate(R.layout.item_msg_right, parent, false)
+                SentViewHolder(view)
+            }
+            else -> {
+                val view = inflater.inflate(R.layout.item_msg_left, parent, false)
+                ReceivedViewHolder(view)
+            }
+        }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val msg = msgList[position]
+        when (holder) {
+            is ReceivedViewHolder -> holder.bind(msg)
+            is SentViewHolder -> holder.bind(msg)
+        }
     }
 
     fun updateData(newList: List<Msg>) {
@@ -76,13 +54,32 @@ class MsgAdapter(private var msgList: MutableList<Msg>) :
         notifyDataSetChanged()
     }
 
-    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val leftLayout: LinearLayout = itemView.findViewById(R.id.item_message_left)
-        val rightLayout: LinearLayout = itemView.findViewById(R.id.item_message_right)
-        val thinkingLayout: LinearLayout = itemView.findViewById(R.id.item_message_thinking)
-        val leftMsg: TextView = itemView.findViewById(R.id.left_message)
-        val rightMsg: TextView = itemView.findViewById(R.id.right_message)
-        val leftTime: TextView = itemView.findViewById(R.id.left_time)
-        val rightTime: TextView = itemView.findViewById(R.id.right_time)
+    fun addMessage(msg: Msg) {
+        msgList.add(msg)
+        notifyItemInserted(msgList.size - 1)
+    }
+
+    class ReceivedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val leftLayout: LinearLayout = itemView.findViewById(R.id.item_message_left)
+        private val leftMsg: TextView = itemView.findViewById(R.id.left_message)
+        private val leftTime: TextView = itemView.findViewById(R.id.left_time)
+
+        fun bind(msg: Msg) {
+            leftLayout.visibility = View.VISIBLE
+            leftMsg.text = msg.content
+            leftTime.text = msg.time
+        }
+    }
+
+    class SentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val rightLayout: LinearLayout = itemView.findViewById(R.id.item_message_right)
+        private val rightMsg: TextView = itemView.findViewById(R.id.right_message)
+        private val rightTime: TextView = itemView.findViewById(R.id.right_time)
+
+        fun bind(msg: Msg) {
+            rightLayout.visibility = View.VISIBLE
+            rightMsg.text = msg.content
+            rightTime.text = msg.time
+        }
     }
 }

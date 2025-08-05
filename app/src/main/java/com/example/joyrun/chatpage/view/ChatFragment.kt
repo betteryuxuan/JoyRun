@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.joyrun.R
 import com.example.joyrun.adapter.MsgAdapter
+import com.example.joyrun.chatpage.MsgTopMarginDecoration
 import com.example.joyrun.chatpage.viewmodel.ChatViewModel
 import com.example.joyrun.chatpage.viewmodel.ChatViewModelFactory
 import com.example.joyrun.databinding.FragmentChatBinding
@@ -37,15 +39,14 @@ class ChatFragment : Fragment() {
 
         val layoutManager = LinearLayoutManager(requireContext())
         binding.msgRecyclerView.layoutManager = layoutManager
-        adapter = MsgAdapter(mutableListOf())
+        adapter = MsgAdapter( mutableListOf())
         binding.msgRecyclerView.adapter = adapter
+
+        binding.msgRecyclerView.addItemDecoration(MsgTopMarginDecoration(requireContext(), 35))
 
         viewModel.msgList.observe(viewLifecycleOwner) {
             adapter.updateData(it)
-            binding.msgRecyclerView.post {
-                layoutManager.scrollToPosition(it.size - 1)
-            }
-
+            binding.msgRecyclerView.scrollToPosition(it.size - 1)
         }
 
         viewModel.error.observe(viewLifecycleOwner) { msg ->
@@ -82,5 +83,6 @@ class ChatFragment : Fragment() {
         super.onPause()
         viewModel.saveToLocal()
     }
+
 
 }

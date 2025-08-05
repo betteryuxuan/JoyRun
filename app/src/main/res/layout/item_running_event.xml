@@ -40,16 +40,16 @@
             <com.example.joyrun.custom.PathPreviewView
                 android:id="@+id/ppv_plan"
                 android:layout_width="75dp"
-                android:visibility="gone"
                 android:layout_height="75dp"
-                android:background="#d9e8c9" />
+                android:background="#d9e8c9"
+                android:visibility="gone" />
 
             <ImageView
                 android:id="@+id/img_run_indoor"
                 android:layout_width="75dp"
-                android:padding="18dp"
                 android:layout_height="75dp"
                 android:layout_gravity="center"
+                android:padding="18dp"
                 android:src="@drawable/ic_runindoor" />
         </androidx.cardview.widget.CardView>
 
@@ -68,13 +68,13 @@
             android:id="@+id/tvDistance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/mibold"
             android:text='@{FormatUtils.formatDistanceWithoutKm(event.totalDistance)}'
             android:textColor="@color/black"
             android:textSize="28sp"
-            android:fontFamily="@font/mibold"
             android:textStyle="bold|italic"
-            app:layout_constraintStart_toStartOf="@id/tvStartTime"
             app:layout_constraintBottom_toTopOf="@id/tvDuration"
+            app:layout_constraintStart_toStartOf="@id/tvStartTime"
             app:layout_constraintTop_toBottomOf="@+id/tvStartTime" />
 
         <TextView
@@ -97,8 +97,8 @@
             android:text='@{"用时 "+FormatUtils.formatDuration(event.duration)}'
             android:textColor="#b5b5b5"
             android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="@id/tvStartTime"
-            app:layout_constraintBottom_toBottomOf="@id/cardView" />
+            app:layout_constraintBottom_toBottomOf="@id/cardView"
+            app:layout_constraintStart_toStartOf="@id/tvStartTime" />
 
         <TextView
             android:id="@+id/tvPace"

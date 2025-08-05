@@ -11,15 +11,15 @@
 
     </data>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingStart="16dp"
         android:paddingTop="10dp"
         android:paddingEnd="16dp"
-        android:paddingBottom="10dp">
+        android:paddingBottom="15dp">
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_sport"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -27,7 +27,8 @@
             app:cardCornerRadius="20dp"
             app:cardElevation="4dp"
             app:cardPreventCornerOverlap="false"
-            app:cardUseCompatPadding="true">
+            app:cardUseCompatPadding="true"
+            app:strokeColor="@android:color/transparent">
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -46,14 +47,14 @@
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_runindoor2" />
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cv_sport_distance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|bottom"
                     android:layout_marginBottom="20dp"
                     app:cardBackgroundColor="#e8e8ea"
-                    app:cardCornerRadius="18dp"
+                    app:cardCornerRadius="20dp"
                     app:cardElevation="0dp">
 
                     <LinearLayout
@@ -77,13 +78,9 @@
                             android:textSize="18sp"
                             android:textStyle="bold" />
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
+                </com.google.android.material.card.MaterialCardView>
             </FrameLayout>
 
-
-        </androidx.cardview.widget.CardView>
-
-
-    </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </FrameLayout>
 </layout>

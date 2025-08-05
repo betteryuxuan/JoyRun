@@ -42,6 +42,8 @@ class ChatViewModel(private val context: Context) : ViewModel() {
         val sendMsg = Msg(content, FormatUtils.getFormattedNowTime(), Msg.Companion.TYPE_SENT)
         _msgList.value?.add(sendMsg)
         _msgList.postValue(_msgList.value)
+//        _msgList.value  =
+
 
         sendMessage(content)
     }
