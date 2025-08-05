@@ -1,0 +1,1 @@
+**MVVM** + **livedata** + **Retrofit** + **Room**
